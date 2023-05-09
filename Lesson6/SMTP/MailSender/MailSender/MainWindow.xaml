@@ -1,0 +1,61 @@
+﻿<Window x:Class="MailSender.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MailSender" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="From:" />
+        <Label Grid.Row="1" Grid.Column="0" Content="To:" />
+        <Label Grid.Row="2" Grid.Column="0" Content="Theme:" />
+        <TextBox Grid.Row="0" Grid.Column="1" Name="FromBox" />
+        <TextBox Grid.Row="1" Grid.Column="1" Name="ToBox" />
+        <TextBox Grid.Row="2" Grid.Column="1" Name="ThemeBox" />
+        <ListBox Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="2" Name="AttachmentsListBox" />
+        <Button Grid.Row="3" Grid.Column="3" Content="Attach a file" Click="AttachFile_OnClick" />
+        <GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Header="Message text:">
+            <TextBox Margin="0" Name="BodyBox" />
+        </GroupBox>
+        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="New letter" Click="NewLetter_OnClick" />
+            <Button Content="Send" Click="Send_OnClick" />
+        </StackPanel>
+    </Grid>
+</Window>

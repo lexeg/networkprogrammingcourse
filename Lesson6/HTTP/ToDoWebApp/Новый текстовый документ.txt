@@ -1,0 +1,12 @@
+var client = new HttpClient();
+var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:5230/todo/file");
+request.Headers.Add("accept", "*/*");
+var content = new MultipartFormDataContent();
+content.Add(new StreamContent(File.OpenRead("/C:/Users/petrenko-a/Downloads/нарезка/Interaction/мегафон-екатерина.wav")), "formFile", "/C:/Users/petrenko-a/Downloads/нарезка/Interaction/мегафон-екатерина.wav");
+request.Content = content;
+var response = await client.SendAsync(request);
+response.EnsureSuccessStatusCode();
+Console.WriteLine(await response.Content.ReadAsStringAsync());
+
+
+https://procodeguide.com/programming/file-upload-in-aspnet-core/

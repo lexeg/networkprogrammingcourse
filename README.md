@@ -1,3 +1,9 @@
+---
+
+## ToDo
+1. Собрать для каждого курса свой список литературы.
+2  Собрать для каждого курса свой список со ссылками на ролики с Youtube.
+
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
 When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.

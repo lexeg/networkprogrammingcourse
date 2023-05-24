@@ -21,7 +21,7 @@ public partial class MainWindow
     {
         if (_socket != null && _thread != null) return;
         _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.IP);
-        _socket.Bind(new IPEndPoint(IPAddress.Parse("10.2.21.129"), 100));
+        _socket.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 100));
 
         _thread = new System.Threading.Thread(ReceiveMessage);
         _thread.Start(_socket);
@@ -48,7 +48,7 @@ public partial class MainWindow
     {
         var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.IP);
         socket.SendTo(System.Text.Encoding.Unicode.GetBytes(MessageTextBox.Text),
-            new IPEndPoint(IPAddress.Parse("10.2.21.255"), 100));
+            new IPEndPoint(IPAddress.Parse("127.0.0.1"), 100));
         socket.Shutdown(SocketShutdown.Send);
         socket.Close();
     }

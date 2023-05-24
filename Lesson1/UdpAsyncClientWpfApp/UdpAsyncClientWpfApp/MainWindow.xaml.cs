@@ -26,7 +26,7 @@ public partial class MainWindow
     {
         if (_socket != null) return;
         _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.IP);
-        _socket.Bind(new IPEndPoint(IPAddress.Parse("10.2.21.129"), 100));
+        _socket.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 100));
 
         _state.WorkSocket = _socket;
         _receiveResult = _socket.BeginReceiveFrom(_state.Buffer,
@@ -56,7 +56,7 @@ public partial class MainWindow
         var buffer = Encoding.Unicode.GetBytes(MessageTextBox.Text);
         _sendResult = socket.BeginSendTo(buffer, 0, buffer.Length,
             SocketFlags.None,
-            new IPEndPoint(IPAddress.Parse("10.2.21.255"), 100),
+            new IPEndPoint(IPAddress.Parse("127.0.0.1"), 100),
             SendCompleted,
             socket);
     }

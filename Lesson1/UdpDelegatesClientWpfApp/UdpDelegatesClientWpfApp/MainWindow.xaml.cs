@@ -1,5 +1,7 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using System.Windows;
 
 namespace UdpDelegatesClientWpfApp;
@@ -9,7 +11,8 @@ namespace UdpDelegatesClientWpfApp;
 /// </summary>
 public partial class MainWindow
 {
-    private System.Threading.Thread _thread;
+    private readonly CancellationTokenSource _cancelTokenSource = new();
+    private Thread _thread;
     private Socket _socket;
 
     public MainWindow()
@@ -23,15 +26,14 @@ public partial class MainWindow
         _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.IP);
         _socket.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 100));
 
-        _thread = new System.Threading.Thread(ReceiveMessage);
-        _thread.Start(_socket);
+        _thread = new Thread(ReceiveMessage);
+        _thread.Start(new ThreadData { Socket = _socket, CancellationToken = _cancelTokenSource.Token });
     }
 
     private void StopOnClick(object sender, RoutedEventArgs e)
     {
         if (_socket == null) return;
-        //TODO: Переписать
-        _thread.Abort();
+        _cancelTokenSource.Cancel();
         _thread = null;
         _socket.Shutdown(SocketShutdown.Receive);
         _socket.Close();
@@ -55,20 +57,37 @@ public partial class MainWindow
 
     private void ReceiveMessage(object obj)
     {
-        if (obj is not Socket receivedSocket)
+        try
         {
-            return;
-        }
+            if (obj is not ThreadData threadData)
+            {
+                return;
+            }
 
-        var buffer = new byte[1_024];
-        do
+            var cancellationToken = threadData.CancellationToken;
+            var socket = threadData.Socket;
+            var buffer = new byte[1_024];
+            do
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                EndPoint endPoint = new IPEndPoint(0x7F000000, 100);
+                var length = socket.ReceiveFrom(buffer, ref endPoint);
+                var clientIp = ((IPEndPoint)endPoint).Address.ToString();
+                var receivedMessage = System.Text.Encoding.Unicode.GetString(buffer, 0, length);
+                var text = $"\nReceived from {clientIp}\r\n{receivedMessage}\r\n";
+                Dispatcher.Invoke(() => MessagesTextBox.Text += text);
+            } while (true);
+        }
+        catch (OperationCanceledException)
         {
-            EndPoint endPoint = new IPEndPoint(0x7F000000, 100);
-            var length = receivedSocket.ReceiveFrom(buffer, ref endPoint);
-            var clientIp = ((IPEndPoint)endPoint).Address.ToString();
-            var receivedMessage = System.Text.Encoding.Unicode.GetString(buffer, 0, length);
-            var text = $"\nReceived from {clientIp}\r\n{receivedMessage}\r\n";
-            Dispatcher.Invoke(() => MessagesTextBox.Text += text);
-        } while (true);
+            MessageBox.Show("Operation was canceled.");
+        }
+    }
+
+    private class ThreadData
+    {
+        public Socket Socket { get; set; }
+
+        public CancellationToken CancellationToken { get; set; }
     }
 }

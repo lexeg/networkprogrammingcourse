@@ -26,7 +26,7 @@ public partial class MainWindow
         {
             _tcpListener = new TcpListener(IPAddress.Parse(IpAddressTextBox.Text), Convert.ToInt32(PortTextBox.Text));
             _tcpListener.Start();
-            var thread = new Thread(ThreadFun) { IsBackground = true };
+            var thread = new Thread(ThreadReceive) { IsBackground = true };
             thread.Start();
         }
         catch (SocketException socketException)
@@ -39,22 +39,23 @@ public partial class MainWindow
         }
     }
 
-    private void ThreadFun()
+    private void ThreadReceive()
     {
         while (true)
         {
+            if (!_tcpListener.Pending()) continue;
             var tcpClient = _tcpListener.AcceptTcpClient();
             var streamReader = new StreamReader(tcpClient.GetStream(), Encoding.Unicode);
             var message = streamReader.ReadLine() ?? string.Empty;
-            MessagesListBox.Items.Add(message);
+            Dispatcher.Invoke(() => MessagesListBox.Items.Add(message));
             tcpClient.Close();
             if (message.ToUpper() != "EXIT") continue;
             _tcpListener.Stop();
-            Close();
+            Dispatcher.Invoke(Close);
         }
     }
 
-    private void MainWindow_OnClosed(object? sender, EventArgs e)
+    private void MainWindow_OnClosed(object sender, EventArgs e)
     {
         _tcpListener?.Stop();
     }

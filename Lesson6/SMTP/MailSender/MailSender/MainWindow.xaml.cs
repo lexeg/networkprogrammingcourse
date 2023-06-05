@@ -47,21 +47,18 @@ namespace MailSender
             SmtpClient client = new SmtpClient(serverAddress);
             client.Port = serverPort;//sets the server port
             // settings for sending mail
-            //alexander.petrenko.develop@gmail.com
-            //PerfectionIsNoLonger_28_ATrifle
-            //ogkmysibhuvclgxg
-            client.Credentials = new NetworkCredential("klim2041@yandex","PerfectionIsNoLonger_28_ATrifle");
+            client.Credentials = new NetworkCredential("<login>","<password>");
             // call asynchronous message sending
             // client.SendAsync(message,"That's all");
             client.Send(message);*/
-            MailAddress from = new MailAddress("klim2041@yandex", "Alexander Petrenko");
-            MailAddress to = new MailAddress("alexander.petrenko.develop@gmail.com");
+            MailAddress from = new MailAddress("<from>", "from alias");
+            MailAddress to = new MailAddress("to");
             MailMessage m = new MailMessage(from, to);
             m.Subject = "Тест";
             m.Body = "Письмо-тест 2 работы smtp-клиента";
             SmtpClient smtp = new SmtpClient();//new SmtpClient(serverAddress, serverPort);
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("klim2041@yandex","PerfectionIsNoLonger_28_ATrifle");
+            smtp.Credentials = new NetworkCredential("<login>","<password>");
             // smtp.EnableSsl = true;
             // smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.Host = serverAddress;

@@ -3,6 +3,7 @@
 ## ToDo
 1. Собрать для каждого курса свой список литературы.
 2  Собрать для каждого курса свой список со ссылками на ролики с Youtube.
+3  Скоро начало курса у новой группы.
 
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 

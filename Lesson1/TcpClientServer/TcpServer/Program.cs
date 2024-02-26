@@ -2,13 +2,14 @@
 using System.Net.Sockets;
 using System.Text;
 
-var serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+var serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
 var address = IPAddress.Parse("127.0.0.1");
 var endpoint = new IPEndPoint(address, 1024);
 
 serverSocket.Bind(endpoint);
 serverSocket.Listen(10);
+
 try
 {
     while (true)
@@ -20,7 +21,7 @@ try
         do
         {
             length = clientSocket.Receive(buffer);
-            Console.Write(Encoding.ASCII.GetString(buffer, 0, length));
+            Console.WriteLine(Encoding.ASCII.GetString(buffer, 0, length));
         } while (length > 0);
 
         Console.WriteLine();

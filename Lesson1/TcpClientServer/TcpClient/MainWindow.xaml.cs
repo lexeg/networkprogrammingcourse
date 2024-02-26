@@ -4,11 +4,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Windows;
 
-namespace ClientWpfApp;
+namespace TcpClient;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow
 {
     public MainWindow()

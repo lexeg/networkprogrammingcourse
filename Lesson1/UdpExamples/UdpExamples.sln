@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdpNetFrameworkWpfExample",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdpNetCoreAwaitWpfExample", "UdpNetCoreAwaitWpfExample\UdpNetCoreAwaitWpfExample.csproj", "{86DB18B1-BE47-4F02-AED2-7A98944FEBD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdpDelegatesClientWpf", "UdpDelegatesClientWpf\UdpDelegatesClientWpf.csproj", "{D889C963-0EDB-4341-BA7A-A7BD0C68A7C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{86DB18B1-BE47-4F02-AED2-7A98944FEBD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86DB18B1-BE47-4F02-AED2-7A98944FEBD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86DB18B1-BE47-4F02-AED2-7A98944FEBD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D889C963-0EDB-4341-BA7A-A7BD0C68A7C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D889C963-0EDB-4341-BA7A-A7BD0C68A7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D889C963-0EDB-4341-BA7A-A7BD0C68A7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D889C963-0EDB-4341-BA7A-A7BD0C68A7C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

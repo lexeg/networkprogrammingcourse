@@ -3,10 +3,10 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
-namespace Server;
+namespace ServerAsyncAwait;
 
 public partial class MainWindow
 {
@@ -17,43 +17,42 @@ public partial class MainWindow
         InitializeComponent();
     }
 
-    private void StartButtonOnClick(object sender, RoutedEventArgs e)
+    private async void StartButtonOnClick(object sender, RoutedEventArgs e)
     {
         try
         {
             _tcpListener = new TcpListener(IPAddress.Parse(IpAddressTextBox.Text), Convert.ToInt32(PortTextBox.Text));
             _tcpListener.Start();
-            var thread = new Thread(ThreadReceive) { IsBackground = true };
-            thread.Start();
+            await Task.Run(ThreadReceive);
         }
-        catch (SocketException socketException)
+        catch (SocketException ex)
         {
-            MessageBox.Show("Socket exception: " + socketException.Message);
+            MessageBox.Show($"Socket exception: {ex.Message}");
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            MessageBox.Show("Exception : " + exception.Message);
+            MessageBox.Show($"Exception: {ex.Message}");
         }
     }
 
-    private void ThreadReceive()
+    private void MainWindow_OnClosed(object sender, EventArgs e)
+    {
+        _tcpListener.Stop();
+    }
+
+    private async Task ThreadReceive()
     {
         while (true)
         {
             if (!_tcpListener.Pending()) continue;
-            var tcpClient = _tcpListener.AcceptTcpClient();
-            var streamReader = new StreamReader(tcpClient.GetStream(), Encoding.Unicode);
-            var message = streamReader.ReadLine() ?? string.Empty;
+            var tcpClient = await _tcpListener.AcceptTcpClientAsync();
+            var sr = new StreamReader(tcpClient.GetStream(), Encoding.Unicode);
+            var message = await sr.ReadLineAsync() ?? string.Empty;
             Dispatcher.Invoke(() => MessagesListBox.Items.Add(message));
             tcpClient.Close();
             if (message.ToUpper() != "EXIT") continue;
             _tcpListener.Stop();
             Dispatcher.Invoke(Close);
         }
-    }
-
-    private void MainWindow_OnClosed(object sender, EventArgs e)
-    {
-        _tcpListener?.Stop();
     }
 }

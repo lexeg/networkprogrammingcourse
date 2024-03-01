@@ -6,9 +6,6 @@ using System.Windows;
 
 namespace Client;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow
 {
     private TcpClient _client;

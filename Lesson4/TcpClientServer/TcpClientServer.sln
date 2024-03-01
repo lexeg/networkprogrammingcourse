@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{7E969F72-124D-4AE1-AA2A-0D28E5D72952}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerAsyncAwait", "ServerAsyncAwait\ServerAsyncAwait.csproj", "{0E720049-8353-48D1-A3F6-482A22C61283}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientAsyncAwait", "ClientAsyncAwait\ClientAsyncAwait.csproj", "{674C7284-9986-4496-8B87-8B6515150707}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{7E969F72-124D-4AE1-AA2A-0D28E5D72952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E969F72-124D-4AE1-AA2A-0D28E5D72952}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E969F72-124D-4AE1-AA2A-0D28E5D72952}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E720049-8353-48D1-A3F6-482A22C61283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E720049-8353-48D1-A3F6-482A22C61283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E720049-8353-48D1-A3F6-482A22C61283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E720049-8353-48D1-A3F6-482A22C61283}.Release|Any CPU.Build.0 = Release|Any CPU
+		{674C7284-9986-4496-8B87-8B6515150707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{674C7284-9986-4496-8B87-8B6515150707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{674C7284-9986-4496-8B87-8B6515150707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{674C7284-9986-4496-8B87-8B6515150707}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

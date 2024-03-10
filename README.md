@@ -55,3 +55,8 @@ Now that you're more familiar with your Bitbucket repository, go ahead and add a
 
 ## FTP
 1. [Как поднять FTP-сервер](https://youtu.be/sU7O3pfRsr0)
+
+---
+
+## HTTP
+1. [Отправка файлов и класс MultipartFormDataContent](https://metanit.com/sharp/net/2.10.php)
